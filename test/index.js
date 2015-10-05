@@ -85,6 +85,11 @@ describe('AnsibleCli run without modifications', function () {
     });
   });
 
+  //data = {
+  //  command: 'ansible all -m ping --inventory-file ./inventory --connection local ',
+  //  raw: '["localhost | success >> {\\n    \\"changed\\": false, \\n    \\"ping\\": \\"pong\\"\\n}\\n\\n",""]'
+  //}
+
   //it('ping', function (done) {
   //  this.timeout(1 * 60 * 1000);//1 minute
 
