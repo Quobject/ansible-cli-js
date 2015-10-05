@@ -1,6 +1,6 @@
 {
   "name": "ansible-cli-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A node.js wrapper for the ansible command",
   "main": "lib/index.js",
   "scripts": {

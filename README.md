@@ -26,13 +26,18 @@ With promise
 
 ```js
 var ansibleCli = new AnsibleCli({
+  cwd: '~/ping'
 });
 
-ansibleCli.command('iam list-users').then(function (data) {
+ansibleCli.command('all -m ping  --inventory-file=./inventory --connection=local').then(function (data) {
   console.log('data = ', data); 
 });
 
-//data = {
+  //data = {
+  //  command: 'ansible all -m ping --inventory-file=./inventory --connection=local ',
+  //  raw: '["localhost | success >> {\\n    \\"changed\\": false, \\n    \\"ping\\": \\"pong\\"\\n}\\n\\n",""]'
+  //}
+
 
 
 ```
@@ -41,34 +46,32 @@ With callback:
 
 ```js
 
-ansibleCli.command('??', function (err, data) {
+ansibleCli.command('all -m ping ansible --inventory-file=./inventory --connection=local', function (err, data) {
   console.log('data = ', data);
 });
 
 //data = {
-
+//  command: 'all -m ping ansible --inventory-file=./inventory --connection=local all',
+//  raw: '["localhost | success >> {\\n    \\"changed\\": false, \\n    \\"ping\\": \\"pong\\"\\n}\\n\\n",""]'
+//}
 
 ```
 
-* ??
+
+With options:
 
 ```js
-ansibleCli.command('??').then(function (data) {
-  console.log('data = ', data); 
+ansibleCli.command('all -m ping', {
+  'inventory-file': './inventory',
+  'connection':'local'
+}).then(function (data) {
+  console.log('data = ', data);
 });
 
-
-//data =  { command: 'aws ec2 describe-instances --instance-ids i-789b3ba7 ',
-
-
-```
-or with options
-
-```js
-ansibleCli.command('ec2 describe-instances', { 'instance-ids': 'i-789b3ba7' }).then(function (data) {
-  console.log('data = ', data); 
-});
+//data = {
+//  command: 'ansible all -m ping --inventory-file ./inventory --connection local ',
+//  raw: '["localhost | success >> {\\n    \\"changed\\": false, \\n    \\"ping\\": \\"pong\\"\\n}\\n\\n",""]'
+//}
 
 ```
-
 

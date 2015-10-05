@@ -32,26 +32,77 @@ describe('AnsibleCli run without modifications', function () {
     assert.equal(ansibleCli.a, 'a');
   });
 
+  it('ping', function (done) {
+    this.timeout(1 * 60 * 1000);//1 minute
 
+    var ansibleCli = new AnsibleCli({
+      cwd: path.join(__dirname, 'ping')
+    });
 
-//  it('command iam list-users should pass with callback', function (done) {
-//    this.timeout(1 * 60 * 1000);//1 minute
+    assert.isNotNull(ansibleCli);
+    ansibleCli.command('all -m ping --inventory-file ./inventory --connection local').then(function (data) {
+      console.log('data = ', util.inspect(data, { depth: 10 }));
+      assert.isNotNull(data);
+      done();
+    });
+  });
 
-//    var ansibleCli = new AnsibleCli({
-//      aws_access_key_id: config.aws.accessKeyId,
-//      aws_secret_access_key: config.aws.secretAccessKey
-//      //cwd: 'path to current working directory'
-//    });
+  //data = {
+  //  command: 'ansible --inventory-file=./inventory --connection=local all -m ping ',
+  //  raw: '["localhost | success >> {\\n    \\"changed\\": false, \\n    \\"ping\\": \\"pong\\"\\n}\\n\\n",""]'
+  //}
 
-//    assert.isNotNull(ansibleCli);
-//    var failed = false;
-//    var err = null;
-//    ansibleCli.command('iam list-users', function (err, data) {
-//      //console.log('data = ', util.inspect(data, { depth: 10 }));
-//      assert.isNotNull(data);
-//      done();
-//    });
-//  }); 
+  it('ping with callback', function (done) {
+    this.timeout(1 * 60 * 1000);//1 minute
+
+    var ansibleCli = new AnsibleCli({
+      cwd: path.join(__dirname, 'ping')
+    });
+
+    assert.isNotNull(ansibleCli);
+    ansibleCli.command('all -m ping --inventory-file ./inventory --connection local', function (err, data) {
+      console.log('data = ', util.inspect(data, { depth: 10 }));
+      assert.isNotNull(data);
+      done();
+    });
+  });
+
+  it('ping with options', function (done) {
+    this.timeout(1 * 60 * 1000);//1 minute
+
+    var ansibleCli = new AnsibleCli({
+      cwd: path.join(__dirname, 'ping')
+    });
+
+    assert.isNotNull(ansibleCli);
+    ansibleCli.command('all -m ping', {
+      'inventory-file': './inventory',
+      'connection':'local'
+    }).then(function (data) {
+      console.log('data = ', util.inspect(data, { depth: 10 }));
+      assert.isNotNull(data);
+      done();
+    });
+  });
+
+  //it('ping', function (done) {
+  //  this.timeout(1 * 60 * 1000);//1 minute
+
+  //  var ansibleCli = new AnsibleCli({
+  //    aws_access_key_id: config.aws.accessKeyId,
+  //    aws_secret_access_key: config.aws.secretAccessKey
+  //    cwd: 'path to current working directory'
+  //  });
+
+  //  assert.isNotNull(ansibleCli);
+  //  var failed = false;
+  //  var err = null;
+  //  ansibleCli.command('iam list-users', function (err, data) {
+  //    console.log('data = ', util.inspect(data, { depth: 10 }));
+  //    assert.isNotNull(data);
+  //    done();
+  //  });
+  //}); 
 
 //  it('command aim2 should fail', function (done) {
 //    var ansibleCli = new AnsibleCli();
