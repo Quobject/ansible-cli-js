@@ -1,6 +1,6 @@
 {
   "name": "ansible-cli-js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A node.js wrapper for the ansible command",
   "main": "dist/index.js",
   "typings":  "dist/index",  
@@ -19,7 +19,7 @@
     "url": "git+https://github.com/Quobject/ansible-cli-js.git"
   },
   "keywords": [
-    "table"
+    "ansible"
   ],
   "author": "Matthias Ludwig <mludwig@quobject.io>",
   "license": "MIT",
