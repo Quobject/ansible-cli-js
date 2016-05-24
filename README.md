@@ -17,7 +17,7 @@ A node.js wrapper for the [ansible](http://linux.die.net/man/1/ansible) command
 Then:
 
 ```js
-var AnsibleCli = require('ansible-cli-js');
+var ansibleCli = require('ansible-cli-js');
 
 ```
 
@@ -26,8 +26,8 @@ var AnsibleCli = require('ansible-cli-js');
 With promise:
 
 ```js
-var Options = AnsibleCli.Options();
-var Ansible = new AnsibleCli.Ansible;
+var Options = ansibleCli.Options;
+var Ansible = ansibleCli.Ansible;
 
 var options = new Options(
     /* currentWorkingDirectory */ 'ping'
@@ -49,7 +49,7 @@ With callback:
 
 ```js
 
-ansibleCli.command('ansible all -m ping --inventory-file=./inventory --connection=local', function (err, data) {
+ansible.command('ansible all -m ping --inventory-file=./inventory --connection=local', function (err, data) {
   console.log('data = ', data);
 });
 
