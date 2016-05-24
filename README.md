@@ -8,7 +8,7 @@ A node.js wrapper for the [ansible](http://linux.die.net/man/1/ansible) command
 
 ### Step 1: Prerequisites
 
-Ansible must be installed and accessible in the path
+[Ansible](http://www.ansible.com/) must be installed and accessible in the path
 
 ### Step 2: Installation
     
@@ -18,60 +18,58 @@ Then:
 
 ```js
 var AnsibleCli = require('ansible-cli-js');
+
 ```
 
 ## Usage
 
-With promise
+With promise:
 
 ```js
-var ansibleCli = new AnsibleCli({
-  cwd: '~/ping'
-});
+var Options = AnsibleCli.Options();
+var Ansible = new AnsibleCli.Ansible;
 
-ansibleCli.command('all -m ping  --inventory-file=./inventory --connection=local').then(function (data) {
+var options = new Options(
+    /* currentWorkingDirectory */ 'ping'
+);
+
+var ansible = new Ansible(options);
+
+ansible.command('all -m ping  --inventory-file=./inventory --connection=local').then(function (data) {
   console.log('data = ', data); 
 });
 
-  //data = {
-  //  command: 'ansible all -m ping --inventory-file=./inventory --connection=local ',
-  //  raw: '["localhost | success >> {\\n    \\"changed\\": false, \\n    \\"ping\\": \\"pong\\"\\n}\\n\\n",""]'
-  //}
-
-
-
+//data = {
+//  command: 'ansible all -m ping --inventory-file=./inventory --connection=local ',
+//  raw: '["localhost | success >> {\\n    \\"changed\\": false, \\n    \\"ping\\": \\"pong\\"\\n}\\n\\n",""]'
+//}
 ```
 
 With callback:
 
 ```js
 
-ansibleCli.command('all -m ping ansible --inventory-file=./inventory --connection=local', function (err, data) {
+ansibleCli.command('ansible all -m ping --inventory-file=./inventory --connection=local', function (err, data) {
   console.log('data = ', data);
 });
-
-//data = {
-//  command: 'all -m ping ansible --inventory-file=./inventory --connection=local all',
-//  raw: '["localhost | success >> {\\n    \\"changed\\": false, \\n    \\"ping\\": \\"pong\\"\\n}\\n\\n",""]'
-//}
 
 ```
 
 
-With options:
+Typescript:
 
 ```js
-ansibleCli.command('all -m ping', {
-  'inventory-file': './inventory',
-  'connection':'local'
-}).then(function (data) {
-  console.log('data = ', data);
-});
+import { Ansible, Options } from 'ansible-cli-js';
 
-//data = {
-//  command: 'ansible all -m ping --inventory-file ./inventory --connection local ',
-//  raw: '["localhost | success >> {\\n    \\"changed\\": false, \\n    \\"ping\\": \\"pong\\"\\n}\\n\\n",""]'
-//}
+const options = new Options(
+  /* currentWorkingDirectory */ 'ping'
+);
+
+const ansible = new Ansible(options);
+
+ansible.command('all -m ping --inventory-file ./inventory --connection local').then(function (data) {
+  console.log('data = ', util.inspect(data, { depth: 10 }));
+});
 
 ```
 
