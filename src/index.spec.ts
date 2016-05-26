@@ -8,7 +8,7 @@ import { Ansible, Options } from './index';
 
 test('dockermachine-cli-js', t => {
 
-  t.test('config', t => {
+  t.test('config2', t => {
     const options = new Options(
       /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'ping')
     );
