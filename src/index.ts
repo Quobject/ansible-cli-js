@@ -1,4 +1,4 @@
-﻿import * as Promise from 'bluebird';
+﻿import nodeify from 'nodeify-ts';
 import * as child_process from 'child_process';
 const exec = child_process.exec;
 
@@ -12,8 +12,7 @@ export class Ansible {
     let ansible = this;
     let execCommand = 'ansible ' + command;
 
-    return Promise.resolve().then(function () {
-
+    const promise = Promise.resolve().then(function () {
       console.log('execCommand =', execCommand);
 
       let execOptions = {
@@ -49,7 +48,9 @@ export class Ansible {
       };
       return result;
 
-    }).nodeify(callback);
+    });
+
+    return nodeify(promise, callback);
   }
 }
 
@@ -61,4 +62,3 @@ export interface IOptions {
 export class Options implements IOptions {
   public constructor(public currentWorkingDirectory?: string) { }
 }
-

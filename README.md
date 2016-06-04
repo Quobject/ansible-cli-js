@@ -4,6 +4,9 @@ A node.js wrapper for the [ansible](http://linux.die.net/man/1/ansible) command
 [![NPM](https://nodei.co/npm/ansible-cli-js.png?downloads=true&downloadRank=true)](https://nodei.co/npm/ansible-cli-js/)
 [![NPM](https://nodei.co/npm-dl/ansible-cli-js.png?months=6&height=3)](https://nodei.co/npm/ansible-cli-js/)
 
+[![NPM version][npm-image]][npm-url]
+[![NPM downloads][downloads-image]][downloads-url]
+
 ## Installation
 
 ### Step 1: Prerequisites
@@ -73,3 +76,11 @@ ansible.command('all -m ping --inventory-file ./inventory --connection local').t
 
 ```
 
+## License
+
+MIT
+
+[npm-image]: https://img.shields.io/npm/v/ansible-cli-js.svg?style=flat
+[npm-url]: https://npmjs.org/package/ansible-cli-js
+[downloads-image]: https://img.shields.io/npm/dm/ansible-cli-js.svg?style=flat
+[downloads-url]: https://npmjs.org/package/ansible-cli-js
