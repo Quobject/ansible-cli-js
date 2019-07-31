@@ -10,7 +10,7 @@ test('dockermachine-cli-js', t => {
 
   t.test('config2', t => {
     const options = new Options(
-      /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'ping')
+      /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'ping'),
     );
 
     const ansible = new Ansible(options);
